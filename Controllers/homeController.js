@@ -18,5 +18,5 @@ exports.getHonesty = (req, res) => {
     res.render("Honesty");
 };
 exports.getIndex = (req, res) => {
-    res.render("Index");
+    res.render("index");
 };
