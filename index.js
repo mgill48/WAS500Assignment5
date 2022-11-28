@@ -1,9 +1,6 @@
 var express = require('express');
+var expressLayouts = require('express-ejs-layouts')
 var app = express();
-var http = require("http");
-var httpStatus = require("http-status-codes");
-var fs = require("fs");
-var router = require("./router");
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var book = require('./Models/book')
@@ -13,7 +10,8 @@ require("dotenv").config();
 
 app.set("view engine", "ejs")
 app.set("port", process.env.PORT)
-
+app.use(expressLayouts)
+app.set("layout", "layout")
 app.use(
     express.urlencoded({
         extended: false
@@ -31,6 +29,7 @@ db.once("open", () => {
     console.log("MongoDB successfully connected")
 });
 app.get("/", bookController.getIndex)
+app.get("/home", bookController.getIndex)
 app.get("/Index.html", bookController.getIndex)
 app.get("/ContactUs.html", bookController.getContact)
 app.get("/Honesty.html", bookController.getHonesty)
