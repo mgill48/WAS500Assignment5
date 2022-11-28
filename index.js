@@ -1,5 +1,9 @@
 var express = require('express');
 var app = express();
+var http = require("http");
+var httpStatus = require("http-status-codes");
+var fs = require("fs");
+var router = require("./router");
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var book = require('./Models/book')
@@ -17,7 +21,7 @@ app.use(
 );
 app.use(express.json())
 var uri = process.env.ATLAS_URI;
-console.log(uri);
+//console.log(uri);
 
 mongoose.connect(uri, { useUnifiedTopology: true})
 
@@ -26,17 +30,19 @@ var db = mongoose.connection
 db.once("open", () => {
     console.log("MongoDB successfully connected")
 });
+app.get("/", bookController.getIndex)
+app.get("/Index.html", bookController.getIndex)
+app.get("/ContactUs.html", bookController.getContact)
+app.get("/Honesty.html", bookController.getHonesty)
+app.get("/Survey.html", bookController.getSurvey)
 
-app.get(
-    "/booklist",
-    bookController.getAllBooks,
+app.get("/Bookslist.html", bookController.getAllBooks,
     (req, res, next) => {
-      console.log(req.data);
       res.render("books", { books: req.data });
     }
   );
   
-  app.listen(app.get("port"), () => {
+app.listen(app.get("port"), () => {
     console.log(`Server running at http://localhost:${app.get("port")}`);
   });
 
