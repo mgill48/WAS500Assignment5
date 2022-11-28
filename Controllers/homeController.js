@@ -7,6 +7,27 @@ exports.getAllBooks = (req, res, next) => {
         next();
     })
 }
+exports.getBook1 = (req, res, next) => {
+    book.find({id: "Book1"}, (error, books) => {
+        if (error) next (error);
+        req.data = books;
+        next();
+    }) 
+}
+exports.getBook2 = (req, res, next) => {
+    book.find({id: "Book2"}, (error, books) => {
+        if (error) next (error);
+        req.data = books;
+        next();
+    }) 
+}
+exports.getBook3 = (req, res, next) => {
+    book.find({id: "Book3"}, (error, books) => {
+        if (error) next (error);
+        req.data = books;
+        next();
+    }) 
+}
 
 exports.getSurvey = (req, res) => {
     res.render("Survey");

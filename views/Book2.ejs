@@ -1,0 +1,27 @@
+<!DOCTYPE = html>
+<html>
+    <head>
+        <title>
+            Book1
+        </title>
+        
+    </head>
+    <body>
+        <% books.forEach(s =>
+            { %> <h1 style="text-align: center;"><%= s.id %>  </h1>
+            <div class="text">
+                <img src="images/alchemist.jpg"
+                width="200px"
+                height="300px"/>
+                        
+                <%= s.AuthorName %>                      
+                <br>
+                <strong><%= s.Description %></strong>
+            </div>
+
+            <%  });
+        %>   
+                
+            
+    </body>
+</html>
