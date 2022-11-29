@@ -18,7 +18,7 @@ app.use(
     })
 );
 app.use(express.json())
-app.use(express.static(__dirname + "/public"))
+app.use(express.static(__dirname))
 var uri = process.env.ATLAS_URI;
 //console.log(uri);
 
@@ -41,14 +41,29 @@ app.get("/books", bookController.getAllBooks,
       res.render("books", { books: req.data });
     }
   );
+app.get("/books/book1", bookController.getBook1,
+  (req, res, next) => {
+    res.render("Book1", { books: req.data });
+  }
+);
 app.get("/book1", bookController.getBook1,
   (req, res, next) => {
     res.render("Book1", { books: req.data });
   }
 );
+app.get("/books/book2", bookController.getBook2,
+  (req, res, next) => {
+    res.render("Book2", { books: req.data });
+  }
+);
 app.get("/book2", bookController.getBook2,
   (req, res, next) => {
     res.render("Book2", { books: req.data });
+  }
+);
+app.get("/books/book3", bookController.getBook3,
+  (req, res, next) => {
+    res.render("Book3", { books: req.data });
   }
 );
 app.get("/book3", bookController.getBook3,
@@ -69,21 +84,21 @@ app.listen(app.get("port"), () => {
         Name: "Ranitat",
         AuthorName: "Harmanjeet",
         Description: "In this book, the author has written about nature, ancient life of Panjab and life's struggles.",
-        BookImage: "images/ranitat.jpg" 
+        BookImage: "/public/images/ranitat.jpg" 
     },
     {
         id: "Book2",
         Name: "The Alchemist",
         AuthorName: "Paulo Coehlo",
         Description: "The Alchemist follows a young Andalusian shepherd in his journey to the pyramids of Egypt, after having a recurring dream of finding a treasure there.",
-        BookImage: "images/alchemist.jpg" 
+        BookImage: "/public/images/alchemist.jpg" 
     },
     {
         id: "Book3",
         Name: "The Power of Your Subconscious Mind",
         AuthorName: "Joseph Murphy",
         Description: "The Power Of Your Subconscious Mind is a spiritual self-help classic, which teaches you how to use visualization and other suggestion techniques to adapt your unconscious behavior in positive ways.",
-        BookImage: "images/power.jpg" 
+        BookImage: "/public/images/power.jpg" 
     },
     function (error, savedDocument) {
         if (error) console.log(error)
