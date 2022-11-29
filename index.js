@@ -18,7 +18,7 @@ app.use(
     })
 );
 app.use(express.json())
-app.use(express.static('/public/images'))
+app.use(express.static(__dirname + "/public"))
 var uri = process.env.ATLAS_URI;
 //console.log(uri);
 
