@@ -31,12 +31,12 @@ db.once("open", () => {
 });
 app.get("/", bookController.getIndex)
 app.get("/home", bookController.getIndex)
-app.get("/Index.html", bookController.getIndex)
-app.get("/ContactUs.html", bookController.getContact)
-app.get("/Honesty.html", bookController.getHonesty)
-app.get("/Survey.html", bookController.getSurvey)
+app.get("/Index", bookController.getIndex)
+app.get("/ContactUs", bookController.getContact)
+app.get("/Honesty", bookController.getHonesty)
+app.get("/Survey", bookController.getSurvey)
 
-app.get("/Bookslist.html", bookController.getAllBooks,
+app.get("/books", bookController.getAllBooks,
     (req, res, next) => {
       res.render("books", { books: req.data });
     }
@@ -56,6 +56,9 @@ app.get("/book3", bookController.getBook3,
   res.render("Book3", { books: req.data });
 }
 );
+app.all('*', (req, res) => {
+    res.status(404).send('<h1>404! Page not found</h1>');
+  });
 app.listen(app.get("port"), () => {
     console.log(`Server running at http://localhost:${app.get("port")}`);
   });
